@@ -43,16 +43,18 @@ namespace PaulZero.WorkQueues.Tokens
             }
         }
 
-        internal void ReleaseToken(WorkerToken token)
+        internal bool ReleaseToken(WorkerToken token)
         {
             if (token.ProviderId != Id)
             {
-                return;
+                return false;
             }
 
             lock (_lock)
             {
                 _tokensIssued--;
+
+                return true;
             }
         }
     }

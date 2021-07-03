@@ -21,8 +21,10 @@ namespace PaulZero.WorkQueues.Tokens
                 return;
             }
 
-            _provider.ReleaseToken(this);
-            _hasDisposed = true;
+            if (_provider.ReleaseToken(this))
+            {
+                _hasDisposed = true;
+            }
         }
     }
 }
